@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>개인택시양수도센터 신청포털</title>
+    <!-- 나눔스퀘어 폰트 불러오기 -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+    
+    <style>
+        :root {
+            --primary-color: #0046FF; 
+            --primary-dark: #002ba8; /* 헤더 그라데이션용 어두운 블루 */
+            --accent-color: #FF5A00; 
+            --bg-color: #f4f7fa;
+            --card-bg: #ffffff;
+            --text-main: #1A1A1A;
+            --text-sub: #4A4A4A;
+        }
+
+        body {
+            font-family: 'NanumSquare', sans-serif; /* 나눔스퀘어 적용 */
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* 블루 계열 헤더 */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            padding: 35px 20px 25px;
+            text-align: center;
+            color: #ffffff; /* 텍스트 흰색으로 변경 */
+            box-shadow: 0 4px 10px rgba(0, 70, 255, 0.2);
+        }
+
+        header h1 {
+            font-size: 26px;
+            margin: 0;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        header p {
+            font-size: 16px;
+            color: #e0e8ff;
+            margin: 10px 0 0 0;
+            word-break: keep-all;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* 아코디언 카드 디자인 */
+        .accordion-item {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e1e4e8;
+            overflow: hidden; /* 펼침 애니메이션을 위해 필수 */
+        }
+
+        /* 클릭하는 제목 영역 */
+        .accordion-header {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            background-color: #ffffff;
+            transition: background-color 0.2s ease;
+        }
+
+        .accordion-header:active {
+            background-color: #f9f9f9;
+        }
+
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .location-tag {
+            font-size: 13px;
+            font-weight: 700;
+            color: #ffffff;
+            background-color: var(--text-main);
+            padding: 3px 10px;
+            border-radius: 6px;
+            width: fit-content;
+        }
+
+        .highlight-tag {
+            background-color: var(--accent-color);
+        }
+
+        .short-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: #000;
+            word-break: keep-all;
+        }
+
+        /* 화살표 아이콘 */
+        .toggle-icon {
+            font-size: 16px;
+            color: #999;
+            transition: transform 0.3s ease;
+        }
+
+        /* 상세 내용 영역 (기본적으로 숨김) */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background-color: #fafbfc;
+        }
+
+        .content-inner {
+            padding: 0 20px 24px 20px;
+            border-top: 1px dashed #eee;
+            margin-top: 10px;
+            padding-top: 20px;
+        }
+
+        .card-desc {
+            font-size: 16px;
+            color: var(--text-sub);
+            margin-bottom: 20px;
+            word-break: keep-all;
+            font-weight: 600;
+        }
+
+        /* 버튼 스타일 */
+        .btn-link {
+            display: block;
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 16px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 18px;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0, 70, 255, 0.2);
+        }
+
+        .highlight-btn {
+            background-color: var(--accent-color);
+            box-shadow: 0 4px 10px rgba(255, 90, 0, 0.2);
+        }
+
+        /* 활성화 상태 클래스 */
+        .accordion-item.active .toggle-icon {
+            transform: rotate(180deg); /* 화살표 뒤집기 */
+            color: var(--primary-color);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px 40px;
+            font-size: 13px;
+            color: #888;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 480px) {
+            header h1 { font-size: 24px; }
+            .short-title { font-size: 17px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>신청하세요!</h1>
+    <p>원하시는 서비스를 선택하시면<br>상세 안내와 신청 페이지가 열립니다.</p>
+</header>
+
+<div class="container">
+    
+    <!-- 1번 서비스 -->
+    <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="header-left">
+                <span class="location-tag">화성/상주</span>
+                <span class="short-title">양수교육 신청일 알림 신청</span>
+            </div>
+            <div class="toggle-icon">▼</div>
+        </div>
+        <div class="accordion-content">
+            <div class="content-inner">
+                <div class="card-desc">가장 중요한 단계인 [화성/상주 양수교육] 일정을 놓치지 않도록 챙겨드립니다.</div>
+                <a href="/notice-detail-page" class="btn-link">양수교육 알림 서비스 신청하기</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2번 서비스 (강조) -->
+    <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="header-left">
+                <span class="location-tag highlight-tag">서울 수서</span>
+                <span class="short-title">개인택시 양수설명회 참석 신청</span>
+            </div>
+            <div class="toggle-icon">▼</div>
+        </div>
+        <div class="accordion-content">
+            <div class="content-inner">
+                <div class="card-desc">면허 양수 전 필수 코스! 조기마감 신화가 이어집니다. 면허+호출플랫폼+차량까지 한자리에</div>
+                <a href="/briefing-detail-page" class="btn-link highlight-btn">설명회 참여 신청하기</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3번 서비스 -->
+    <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="header-left">
+                <span class="location-tag">사당 교육장</span>
+                <span class="short-title">신규교육생 아침간식 이벤트</span>
+            </div>
+            <div class="toggle-icon">▼</div>
+        </div>
+        <div class="accordion-content">
+            <div class="content-inner">
+                <div class="card-desc">일찍 오시는 예비사장님을 위한 든든한 아침 간식 드립니다.</div>
+                <a href="/snack-detail-page" class="btn-link">아침간식 신청하기</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4번 서비스 -->
+    <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="header-left">
+                <span class="location-tag">화성 교육장</span>
+                <span class="short-title">찾아가는 개인택시 양수특강</span>
+            </div>
+            <div class="toggle-icon">▼</div>
+        </div>
+        <div class="accordion-content">
+            <div class="content-inner">
+                <div class="card-desc">꼭 알아야 할 택시면허 양수특강! 양수교육장으로 찾아갑니다. 기회를 놓치지 마세요.</div>
+                <a href="/lecture-detail-page" class="btn-link">양수특강 신청하기</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    © 2026 주식회사 한국모빌리티연구소 l 개인택시 양수도센터. All rights reserved.
+</footer>
+
+<script>
+    // 아코디언 동작 스크립트
+    function toggleAccordion(element) {
+        const item = element.parentElement;
+        const content = element.nextElementSibling;
+        const isActive = item.classList.contains('active');
+
+        // 다른 열려있는 탭을 닫아주어 한 화면에 유지되도록 함
+        document.querySelectorAll('.accordion-item').forEach(otherItem => {
+            otherItem.classList.remove('active');
+            otherItem.querySelector('.accordion-content').style.maxHeight = null;
+        });
+
+        // 클릭한 탭이 닫혀있었다면 열기
+        if (!isActive) {
+            item.classList.add('active');
+            // 내부 컨텐츠의 높이만큼 펴지도록 설정
+            content.style.maxHeight = content.scrollHeight + "px";
+        }
+    }
+</script>
+
+</body>
+</html>
