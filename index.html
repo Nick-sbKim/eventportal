@@ -12,7 +12,7 @@
             --primary-color: #0046FF; 
             --primary-dark: #002ba8; 
             --accent-color: #FF5A00; 
-            --popular-red: #E30613; /* 인기 스티커용 강렬한 레드 */
+            --popular-red: #E30613; 
             --bg-color: #f4f7fa;
             --card-bg: #ffffff;
             --text-main: #1A1A1A;
@@ -66,14 +66,14 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             border: 1px solid #e1e4e8;
             overflow: hidden;
-            position: relative; /* 스티커 위치 기준 */
+            position: relative;
         }
 
-        /* "매우인기" 스티커 스타일 */
+        /* 매우인기 스티커 */
         .popular-sticker {
             position: absolute;
             top: 15px;
-            right: 40px; /* 화살표 옆 위치 */
+            right: 40px;
             background-color: var(--popular-red);
             color: white;
             font-size: 11px;
@@ -81,7 +81,7 @@
             padding: 3px 8px;
             border-radius: 4px;
             z-index: 10;
-            animation: pulse 1.5s infinite; /* 시선 집중 애니메이션 */
+            animation: pulse 1.5s infinite;
         }
 
         @keyframes pulse {
@@ -91,19 +91,25 @@
         }
 
         .accordion-header {
-            padding: 20px;
+            padding: 18px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             cursor: pointer;
             background-color: #ffffff;
-            transition: background-color 0.2s ease;
         }
 
         .header-left {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
+        }
+
+        .agency-tag {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 2px;
         }
 
         .location-tag {
@@ -111,22 +117,22 @@
             font-weight: 700;
             color: #ffffff;
             background-color: var(--text-main);
-            padding: 3px 10px;
-            border-radius: 6px;
+            padding: 2px 8px;
+            border-radius: 4px;
             width: fit-content;
         }
 
         .highlight-tag { background-color: var(--accent-color); }
 
         .short-title {
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 800;
             color: #000;
             word-break: keep-all;
         }
 
         .toggle-icon {
-            font-size: 16px;
+            font-size: 14px;
             color: #999;
             transition: transform 0.3s ease;
         }
@@ -141,16 +147,27 @@
         .content-inner {
             padding: 0 20px 24px 20px;
             border-top: 1px dashed #eee;
-            margin-top: 10px;
+            margin-top: 5px;
             padding-top: 20px;
         }
 
         .card-desc {
-            font-size: 16px;
+            font-size: 15px;
             color: var(--text-sub);
             margin-bottom: 20px;
             word-break: keep-all;
             font-weight: 600;
+        }
+
+        /* 경고 문구 스타일 */
+        .warning-text {
+            color: #d93025;
+            background-color: #fce8e6;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 15px;
         }
 
         .btn-link {
@@ -161,9 +178,16 @@
             padding: 16px;
             border-radius: 12px;
             font-weight: 800;
-            font-size: 18px;
+            font-size: 17px;
             text-decoration: none;
             box-shadow: 0 4px 10px rgba(0, 70, 255, 0.2);
+        }
+
+        /* 비활성화 버튼 스타일 */
+        .btn-disabled {
+            background-color: #ccc;
+            box-shadow: none;
+            cursor: not-allowed;
         }
 
         .highlight-btn {
@@ -179,45 +203,65 @@
         footer {
             text-align: center;
             padding: 30px 20px 40px;
-            font-size: 13px;
+            font-size: 12px;
             color: #888;
             line-height: 1.8;
+            background-color: #fff;
         }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>신청하세요!</h1>
-    <p>원하시는 서비스를 선택하시면<br>상세 안내와 신청 페이지가 열립니다.</p>
+    <h1>통합 신청 포털</h1>
+    <p>성공적인 개인택시의 시작,<br>항목을 선택하여 신청해 주세요.</p>
 </header>
 
 <div class="container">
     
     <!-- 1번 서비스 -->
     <div class="accordion-item">
+        <span class="popular-sticker">매우인기</span>
         <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="header-left">
-                <span class="location-tag">화성/상주</span>
-                <span class="short-title">양수교육 신청일 알림 신청</span>
+                <span class="agency-tag">[개인택시양수도센터]</span>
+                <span class="short-title">양수교육 신청일 알림 서비스</span>
             </div>
             <div class="toggle-icon">▼</div>
         </div>
         <div class="accordion-content">
             <div class="content-inner">
-                <div class="card-desc">가장 중요한 단계인 [화성/상주 양수교육] 일정을 놓치지 않도록 챙겨드립니다.</div>
-                <a href="/notice-detail-page" class="btn-link">양수교육 알림 서비스 신청하기</a>
+                <div class="card-desc">가장 중요한 단계인 양수교육 신청!<br>접수 일정을 놓치지 않도록 문자로 알림을 드립니다.</div>
+                <a href="/notice-detail-page" class="btn-link">알림 서비스 신청하기</a>
             </div>
         </div>
     </div>
 
-    <!-- 2번 서비스 (스티커 적용) -->
+    <!-- 2번 서비스 (비활성화 로직 포함) -->
+    <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="header-left">
+                <span class="agency-tag">[교통안전공단]</span>
+                <span class="short-title">(화성/상주) 개인택시 양수교육 신청</span>
+            </div>
+            <div class="toggle-icon">▼</div>
+        </div>
+        <div class="accordion-content">
+            <div class="content-inner">
+                <div class="card-desc">공단에서 진행하는 양수교육 본 신청입니다.<br>접수 일정을 반드시 확인하시기 바랍니다.</div>
+                <!-- 접수일이 아닐 때 알림을 띄우는 버튼 -->
+                <a href="javascript:void(0);" onclick="alert('지금은 양수교육 접수일이 아닙니다.\n알림 서비스를 신청하시면 접수일에 맞춰 연락드립니다.')" class="btn-link btn-disabled">현재 접수 기간이 아닙니다</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3번 서비스 -->
     <div class="accordion-item">
         <span class="popular-sticker">매우인기</span>
         <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="header-left">
-                <span class="location-tag highlight-tag">서울 수서</span>
-                <span class="short-title">개인택시 양수설명회 참석 신청</span>
+                <span class="agency-tag">[개인택시양수도센터]</span>
+                <span class="short-title">개인택시 양수설명회 신청</span>
             </div>
             <div class="toggle-icon">▼</div>
         </div>
@@ -233,37 +277,37 @@
         </div>
     </div>
 
-    <!-- 3번 서비스 -->
+    <!-- 4번 서비스 -->
     <div class="accordion-item">
         <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="header-left">
-                <span class="location-tag">사당 교육장</span>
-                <span class="short-title">신규교육생 아침간식 이벤트</span>
+                <span class="agency-tag">[서울특별시 교통문화교육원]</span>
+                <span class="short-title">(사당) 신규교육 신청</span>
             </div>
             <div class="toggle-icon">▼</div>
         </div>
         <div class="accordion-content">
             <div class="content-inner">
-                <div class="card-desc">일찍 오시는 예비사장님을 위한 든든한 아침 간식 드립니다.</div>
-                <a href="/snack-detail-page" class="btn-link">아침간식 신청하기</a>
+                <div class="warning-text">⚠️ 택시 경력자 분들은 교육대상자 여부를 반드시 확인하세요.</div>
+                <div class="card-desc">사당 교육장에서 진행되는 신규교육 신청 안내입니다.</div>
+                <a href="/edu-detail-page" class="btn-link">신규교육 신청하기</a>
             </div>
         </div>
     </div>
 
-    <!-- 4번 서비스 (스티커 적용) -->
+    <!-- 5번 서비스 -->
     <div class="accordion-item">
-        <span class="popular-sticker">매우인기</span>
         <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="header-left">
-                <span class="location-tag">화성 교육장</span>
-                <span class="short-title">찾아가는 개인택시 양수특강</span>
+                <span class="agency-tag">[개인택시양수도센터]</span>
+                <span class="short-title">신규교육자 간식서비스 신청</span>
             </div>
             <div class="toggle-icon">▼</div>
         </div>
         <div class="accordion-content">
             <div class="content-inner">
-                <div class="card-desc">꼭 알아야 할 택시면허 양수특강! 양수교육장으로 찾아갑니다. 기회를 놓치지 마세요.</div>
-                <a href="/lecture-detail-page" class="btn-link">양수특강 신청하기</a>
+                <div class="card-desc">일찍 오시는 예비사장님을 위한 든든한 아침 간식을 드립니다.</div>
+                <a href="/snack-detail-page" class="btn-link">간식 신청하기</a>
             </div>
         </div>
     </div>
@@ -271,7 +315,9 @@
 </div>
 
 <footer>
-    © 2026 주식회사 한국모빌리티연구소. All rights reserved.
+    <strong>주식회사 한국모빌리티연구소</strong><br>
+    개인택시 양수도센터 | 대표이사 : 고승현<br>
+    © 2026 Korea Mobility Lab. All rights reserved.
 </footer>
 
 <script>
