@@ -10,8 +10,9 @@
     <style>
         :root {
             --primary-color: #0046FF; 
-            --primary-dark: #002ba8; /* 헤더 그라데이션용 어두운 블루 */
+            --primary-dark: #002ba8; 
             --accent-color: #FF5A00; 
+            --popular-red: #E30613; /* 인기 스티커용 강렬한 레드 */
             --bg-color: #f4f7fa;
             --card-bg: #ffffff;
             --text-main: #1A1A1A;
@@ -19,7 +20,7 @@
         }
 
         body {
-            font-family: 'NanumSquare', sans-serif; /* 나눔스퀘어 적용 */
+            font-family: 'NanumSquare', sans-serif;
             background-color: var(--bg-color);
             margin: 0;
             padding: 0;
@@ -31,9 +32,9 @@
         /* 블루 계열 헤더 */
         header {
             background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-            padding: 35px 20px 25px;
+            padding: 40px 20px 30px;
             text-align: center;
-            color: #ffffff; /* 텍스트 흰색으로 변경 */
+            color: #ffffff;
             box-shadow: 0 4px 10px rgba(0, 70, 255, 0.2);
         }
 
@@ -64,10 +65,31 @@
             margin-bottom: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             border: 1px solid #e1e4e8;
-            overflow: hidden; /* 펼침 애니메이션을 위해 필수 */
+            overflow: hidden;
+            position: relative; /* 스티커 위치 기준 */
         }
 
-        /* 클릭하는 제목 영역 */
+        /* "매우인기" 스티커 스타일 */
+        .popular-sticker {
+            position: absolute;
+            top: 15px;
+            right: 40px; /* 화살표 옆 위치 */
+            background-color: var(--popular-red);
+            color: white;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 4px;
+            z-index: 10;
+            animation: pulse 1.5s infinite; /* 시선 집중 애니메이션 */
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
         .accordion-header {
             padding: 20px;
             display: flex;
@@ -76,10 +98,6 @@
             cursor: pointer;
             background-color: #ffffff;
             transition: background-color 0.2s ease;
-        }
-
-        .accordion-header:active {
-            background-color: #f9f9f9;
         }
 
         .header-left {
@@ -98,9 +116,7 @@
             width: fit-content;
         }
 
-        .highlight-tag {
-            background-color: var(--accent-color);
-        }
+        .highlight-tag { background-color: var(--accent-color); }
 
         .short-title {
             font-size: 18px;
@@ -109,14 +125,12 @@
             word-break: keep-all;
         }
 
-        /* 화살표 아이콘 */
         .toggle-icon {
             font-size: 16px;
             color: #999;
             transition: transform 0.3s ease;
         }
 
-        /* 상세 내용 영역 (기본적으로 숨김) */
         .accordion-content {
             max-height: 0;
             overflow: hidden;
@@ -139,7 +153,6 @@
             font-weight: 600;
         }
 
-        /* 버튼 스타일 */
         .btn-link {
             display: block;
             background-color: var(--primary-color);
@@ -158,9 +171,8 @@
             box-shadow: 0 4px 10px rgba(255, 90, 0, 0.2);
         }
 
-        /* 활성화 상태 클래스 */
         .accordion-item.active .toggle-icon {
-            transform: rotate(180deg); /* 화살표 뒤집기 */
+            transform: rotate(180deg);
             color: var(--primary-color);
         }
 
@@ -170,11 +182,6 @@
             font-size: 13px;
             color: #888;
             line-height: 1.8;
-        }
-
-        @media (max-width: 480px) {
-            header h1 { font-size: 24px; }
-            .short-title { font-size: 17px; }
         }
     </style>
 </head>
@@ -204,8 +211,9 @@
         </div>
     </div>
 
-    <!-- 2번 서비스 (강조) -->
+    <!-- 2번 서비스 (스티커 적용) -->
     <div class="accordion-item">
+        <span class="popular-sticker">매우인기</span>
         <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="header-left">
                 <span class="location-tag highlight-tag">서울 수서</span>
@@ -215,9 +223,11 @@
         </div>
         <div class="accordion-content">
             <div class="content-inner">
-            <div class="card-desc">면허 양수 전 필수 코스!<br>
-    조기마감 신화가 이어집니다.<br>
-    면허 + 호출플랫폼 + 차량까지 한자리에</div>
+                <div class="card-desc">
+                    면허 양수 전 필수 코스!<br>
+                    조기마감 신화가 이어집니다.<br>
+                    면허 + 호출플랫폼 + 차량까지 한자리에
+                </div>
                 <a href="/briefing-detail-page" class="btn-link highlight-btn">설명회 참여 신청하기</a>
             </div>
         </div>
@@ -240,8 +250,9 @@
         </div>
     </div>
 
-    <!-- 4번 서비스 -->
+    <!-- 4번 서비스 (스티커 적용) -->
     <div class="accordion-item">
+        <span class="popular-sticker">매우인기</span>
         <div class="accordion-header" onclick="toggleAccordion(this)">
             <div class="header-left">
                 <span class="location-tag">화성 교육장</span>
@@ -260,26 +271,22 @@
 </div>
 
 <footer>
-    © 2026 주식회사 한국모빌리티연구소 l 개인택시 양수도센터. All rights reserved.
+    © 2026 주식회사 한국모빌리티연구소. All rights reserved.
 </footer>
 
 <script>
-    // 아코디언 동작 스크립트
     function toggleAccordion(element) {
         const item = element.parentElement;
         const content = element.nextElementSibling;
         const isActive = item.classList.contains('active');
 
-        // 다른 열려있는 탭을 닫아주어 한 화면에 유지되도록 함
         document.querySelectorAll('.accordion-item').forEach(otherItem => {
             otherItem.classList.remove('active');
             otherItem.querySelector('.accordion-content').style.maxHeight = null;
         });
 
-        // 클릭한 탭이 닫혀있었다면 열기
         if (!isActive) {
             item.classList.add('active');
-            // 내부 컨텐츠의 높이만큼 펴지도록 설정
             content.style.maxHeight = content.scrollHeight + "px";
         }
     }
